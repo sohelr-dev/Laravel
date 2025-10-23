@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Trainee;
+use App\Http\Controllers\TraineeController;
 
 Route::get('/', function () {
     return view('pages.welcome',[
@@ -36,40 +37,51 @@ Route::get('/users/{username}/profile/{id?}',function($username,$id=null){
 
 //OR route same kaj
 
-
+//for view 
 Route::view('/about','pages.about');
 
-Route::get('trainees',function(){
-    // $trainees=[
-    //     [
-    //       'name'=>"Sohel Rana",
-    //       'email'=> "sohel@gmail.com",
-    //       'phone'=>"01548574252",
-    //       'counrty'=>"BD",
-    //       "is_active"=> true,
-    //       'id'=>1
-    //     ],
-    //     [
-    //       'name'=>"Rahat Rana",
-    //       'email'=> "Rahat@gmail.com",
-    //       'phone'=>"01548574252",
-    //       'counrty'=>"USA",
-    //       "is_active"=> false,
-    //       'id'=>2
-    //     ],
-    //     [
-    //       'name'=>"Roxi Rana",
-    //       'email'=> "Roxi@gmail.com",
-    //       'phone'=>"01548574252",
-    //       'counrty'=>"UK",
-    //       "is_active"=> true,
-    //       'id'=>3
-    //     ]
-    // ];
-    return view('pages.trainee.index',[
-        'trainess'=>Trainee::all()
-    ]);
-});
+//for controller
+
+
+//for view
+
+// Route::get('trainees',function(){
+//     // $trainees=[
+//     //     [
+//     //       'name'=>"Sohel Rana",
+//     //       'email'=> "sohel@gmail.com",
+//     //       'phone'=>"01548574252",
+//     //       'counrty'=>"BD",
+//     //       "is_active"=> true,
+//     //       'id'=>1
+//     //     ],
+//     //     [
+//     //       'name'=>"Rahat Rana",
+//     //       'email'=> "Rahat@gmail.com",
+//     //       'phone'=>"01548574252",
+//     //       'counrty'=>"USA",
+//     //       "is_active"=> false,
+//     //       'id'=>2
+//     //     ],
+//     //     [
+//     //       'name'=>"Roxi Rana",
+//     //       'email'=> "Roxi@gmail.com",
+//     //       'phone'=>"01548574252",
+//     //       'counrty'=>"UK",
+//     //       "is_active"=> true,
+//     //       'id'=>3
+//     //     ]
+//     // ];
+//     return view('pages.trainee.index',[
+//         'trainess'=>Trainee::all()
+//     ]);
+// });
+
+Route::get('/trainees',[TraineeController::class,'index']);
+Route::get('/trainee/{id}',[TraineeController::class,'index']);
+
+//for controler
+
 
 Route::get('/trainee/{id}',function($id){
 
