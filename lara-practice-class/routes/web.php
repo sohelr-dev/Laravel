@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Trainee;
 
 Route::get('/', function () {
     return view('pages.welcome',[
@@ -37,3 +38,83 @@ Route::get('/users/{username}/profile/{id?}',function($username,$id=null){
 
 
 Route::view('/about','pages.about');
+
+Route::get('trainees',function(){
+    // $trainees=[
+    //     [
+    //       'name'=>"Sohel Rana",
+    //       'email'=> "sohel@gmail.com",
+    //       'phone'=>"01548574252",
+    //       'counrty'=>"BD",
+    //       "is_active"=> true,
+    //       'id'=>1
+    //     ],
+    //     [
+    //       'name'=>"Rahat Rana",
+    //       'email'=> "Rahat@gmail.com",
+    //       'phone'=>"01548574252",
+    //       'counrty'=>"USA",
+    //       "is_active"=> false,
+    //       'id'=>2
+    //     ],
+    //     [
+    //       'name'=>"Roxi Rana",
+    //       'email'=> "Roxi@gmail.com",
+    //       'phone'=>"01548574252",
+    //       'counrty'=>"UK",
+    //       "is_active"=> true,
+    //       'id'=>3
+    //     ]
+    // ];
+    return view('pages.trainee.index',[
+        'trainess'=>Trainee::all()
+    ]);
+});
+
+Route::get('/trainee/{id}',function($id){
+
+    // $trainees=[
+    //     [
+    //       'name'=>"Sohel Rana",
+    //       'email'=> "sohel@gmail.com",
+    //       'phone'=>"01548574252",
+    //       'country'=>"BD",
+    //       "is_active"=> true,
+    //       'id'=>1
+    //     ],
+    //     [
+    //       'name'=>"Rahat Rana",
+    //       'email'=> "Rahat@gmail.com",
+    //       'phone'=>"01548574252",
+    //       'country'=>"USA",
+    //       "is_active"=> false,
+    //       'id'=>2
+    //     ],
+    //     [
+    //       'name'=>"Roxi Rana",
+    //       'email'=> "Roxi@gmail.com",
+    //       'phone'=>"01548574252",
+    //       'country'=>"UK",
+    //       "is_active"=> true,
+    //       'id'=>3
+    //     ]
+    // ];
+
+    // $single =collect($trainees)->firstWhere('id', $id);
+    //dd means dumb and die.
+    // dd($single);
+
+    //alternative
+
+    // $single1 =array_filter($trainees,fn($item)=>$item['id'] ==$id);
+    // $single = reset($single1);
+    // dd($single);
+
+    return view('pages.trainee.show',[
+        // 'id'=>$id,
+        "trainee"=>Trainee::readById($id)
+    ]);
+});
+
+
+
