@@ -78,55 +78,55 @@ Route::view('/about','pages.about');
 // });
 
 Route::get('/trainees',[TraineeController::class,'index']);
-Route::get('/trainee/{id}',[TraineeController::class,'index']);
+Route::get('/trainee/{id}',[TraineeController::class,'show']);
 
 //for controler
 
 
-Route::get('/trainee/{id}',function($id){
+// Route::get('/trainee/{id}',function($id){
 
-    // $trainees=[
-    //     [
-    //       'name'=>"Sohel Rana",
-    //       'email'=> "sohel@gmail.com",
-    //       'phone'=>"01548574252",
-    //       'country'=>"BD",
-    //       "is_active"=> true,
-    //       'id'=>1
-    //     ],
-    //     [
-    //       'name'=>"Rahat Rana",
-    //       'email'=> "Rahat@gmail.com",
-    //       'phone'=>"01548574252",
-    //       'country'=>"USA",
-    //       "is_active"=> false,
-    //       'id'=>2
-    //     ],
-    //     [
-    //       'name'=>"Roxi Rana",
-    //       'email'=> "Roxi@gmail.com",
-    //       'phone'=>"01548574252",
-    //       'country'=>"UK",
-    //       "is_active"=> true,
-    //       'id'=>3
-    //     ]
-    // ];
+//     // $trainees=[
+//     //     [
+//     //       'name'=>"Sohel Rana",
+//     //       'email'=> "sohel@gmail.com",
+//     //       'phone'=>"01548574252",
+//     //       'country'=>"BD",
+//     //       "is_active"=> true,
+//     //       'id'=>1
+//     //     ],
+//     //     [
+//     //       'name'=>"Rahat Rana",
+//     //       'email'=> "Rahat@gmail.com",
+//     //       'phone'=>"01548574252",
+//     //       'country'=>"USA",
+//     //       "is_active"=> false,
+//     //       'id'=>2
+//     //     ],
+//     //     [
+//     //       'name'=>"Roxi Rana",
+//     //       'email'=> "Roxi@gmail.com",
+//     //       'phone'=>"01548574252",
+//     //       'country'=>"UK",
+//     //       "is_active"=> true,
+//     //       'id'=>3
+//     //     ]
+//     // ];
 
-    // $single =collect($trainees)->firstWhere('id', $id);
-    //dd means dumb and die.
-    // dd($single);
+//     // $single =collect($trainees)->firstWhere('id', $id);
+//     //dd means dumb and die.
+//     // dd($single);
 
-    //alternative
+//     //alternative
 
-    // $single1 =array_filter($trainees,fn($item)=>$item['id'] ==$id);
-    // $single = reset($single1);
-    // dd($single);
+//     // $single1 =array_filter($trainees,fn($item)=>$item['id'] ==$id);
+//     // $single = reset($single1);
+//     // dd($single);
 
-    return view('pages.trainee.show',[
-        // 'id'=>$id,
-        "trainee"=>Trainee::readById($id)
-    ]);
-});
+//     return view('pages.trainee.show',[
+//         // 'id'=>$id,
+//         "trainee"=>Trainee::readById($id)
+//     ]);
+// });
 
 
 
