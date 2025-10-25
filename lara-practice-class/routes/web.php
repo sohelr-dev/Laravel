@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Trainee;
 use App\Http\Controllers\TraineeController;
+use App\Models\Role;
 
 Route::get('/', function () {
     return view('pages.welcome',[
@@ -77,7 +79,12 @@ Route::view('/about','pages.about');
 //     ]);
 // });
 
-Route::get('/trainees',[TraineeController::class,'index']);
+Route::get('/trainees',[TraineeController::class,'index'])->name("traine.index");
+// Route::get('/trainees',[TraineeController::class,'index']);
+// Route::get('/trainee/{id}',[TraineeController::class,'show']);
+
+//routimg with name
+
 Route::get('/trainee/{id}',[TraineeController::class,'show']);
 
 //for controler
@@ -129,4 +136,11 @@ Route::get('/trainee/{id}',[TraineeController::class,'show']);
 // });
 
 
+// Route::get('/roles',function(){
+//     // dd(Role::all());
+//     (Role::all());
+// });
+
+Route::get('/roles',[RoleController::class,'index'])->name("roles.index");
+Route::get('/roles/role/{id}',[RoleController::class,'show'])->name("roles.show");
 

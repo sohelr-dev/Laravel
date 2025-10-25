@@ -27,7 +27,12 @@
                          <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link" href="/trainees">Trainee</a>
+                         {{-- for name use security perpas --}}
+                         <a class="nav-link" href="{{ route('traine.index') }}">Trainee</a>
+                         {{-- <a class="nav-link" href="/trainees">Trainee</a> --}}
+                    </li>
+                    <li class="nav-item">
+                         <a class="nav-link" href="{{ route('roles.index') }}">Role</a>
                     </li>
                     <li class="nav-item">
                          <a class="nav-link" href="/about">About</a>
