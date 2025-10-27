@@ -11,6 +11,7 @@
                     <thead class="table-dark">
                          <tr>
                               <th>#Id</th>
+                              <th>Title</th>
                               <th>Name</th>
                               <th>Action</th>
                          </tr>
@@ -20,6 +21,7 @@
                          <tr>
                               <td>{{$item["id"]}}</td>
                               <td>{{$item["title"]}}</td>
+                              <td>{{$item["name"]}}</td>
                               <td>
                                    <a href="roles/role/{{ $item['id'] }}" class="btn btn-primary">view</a>
                               </td>  
