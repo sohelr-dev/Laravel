@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -86,5 +87,49 @@ class UserController extends Controller
         ->first();    //
         return view("pages.users.show",compact("user"));
         // dd($user);
+    }
+    public function destroy($id){
+        $user= User::find($id);
+        $user->delete();
+        // dd("Delete");
+        return redirect()->route("users.index")->with('success',"User Delete SuccessFully !");
+    }
+    public function create(){
+        $roles =Role::all();
+        return view ("pages.users.create",compact('roles'));
+        
+    }
+    public function store(Request $request){
+        // dd($request->all());
+        // $user =new User();
+        // $user->first_name =$request->first_name;        //$user->table column name ,$request->form ar name
+        // $user->email =$request->email;
+        // $user->password =$request->password;
+        // $user->role_id =$request->role_id;
+        // $user->save();
+        // dd($user);
+
+        //another method
+
+        //validation
+        $request->validate([
+            'first_name'=>"required|min:2|max:5",
+            // 'first_name'=>['required','mix:2','max:5']      //altanative
+            'email'=>['required','email','unique:users'],
+            'password'=>['required','min:6','confirmed'],
+        ]);
+
+        dd($request->all());
+
+        $user=User::create(
+            [
+                'first_name'=>$request->first_name,
+                'email'=>$request->email,
+                'password'=>$request->password,
+                'role_id'=>$request->role_id,
+            ]
+            );
+            dd($user);
+        
     }
 }

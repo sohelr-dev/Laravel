@@ -5,28 +5,46 @@
 @section("content")
 <div class="container mt-4">
      <div class="card">
+          <div class="my-3  text-end">
+               <a href="{{ route('users.create') }}" class="btn btn-primary">Add New</a>
+          </div>
           <div class="card-header text-center fw-bold">Users List</div>
+          @if (session('success'))
+          <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+          </div>
+               
+          @endif
           <div class="table-responsive">
                <table class="table table-hover table-striped">
                     <thead class="table-dark">
                          <tr>
+                              <th>SL</th>
                               <th>id</th>
                               <th>Name</th>
                               <th>Email</th>
                               <th>Role Name</th>
-                              <th>Action</th>
+                              <th class="text-center">Action</th>
                          </tr>
                     </thead>
                     <tbody>
                          @foreach ($users as $item )
                          <tr>
+                              <td>{{$users->firstItem() + $loop->index}}</td>
                               <td>{{$item["userId"]}}</td>
                               <td>{{$item["first_name"]}}</td>
                               <td>{{$item["email"]}}</td>
                               <td>{{$item["roleName"]}}</td>
      
-                              <td>
+                              <td class="text-center">
                                    <a href="users/user/{{ $item['userId'] }}" class="btn btn-primary">view</a>
+                                   <form action="{{ route('user.destroy', $item['userId']) }}" method="POST" class="d-inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" title="Delete User">
+                                             <i class="bi bi-trash"></i></i> Delete 
+                                        </button>
+                                   </form>
                               </td>
                               
                          </tr>
