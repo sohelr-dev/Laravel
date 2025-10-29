@@ -27,6 +27,9 @@
                <div class="col-6">
                     <label for="ComfirmPassword" class="form-label"> Comfirm Password</label>
                     <input type="password" name="password_confirmation" class="form-control">
+                    @error('password_confirmation')
+                         <span class="text-danger">{{ $message }}</span>
+                    @enderror
                </div>
                <div class="col-6">
                     <label for="role_id" class="form-label"> Role</label>
@@ -39,8 +42,6 @@
                </div>
                <div class="col-12">
                     @if ($errors->any())
-                         
-                    
                     <ul>
                          @foreach ($errors->all() as $item )
                          <li>{{$item}}</li>

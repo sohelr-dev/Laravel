@@ -150,7 +150,8 @@ Route::get('/roles/role/{id}',[RoleController::class,'show'])->name("roles.show"
 
 Route::get("/users",[UserController::class,'index'])->name("users.index");
 Route::get("/users/create",[UserController::class,'create'])->name("users.create");
+Route::get("/users/edit/{id}",[UserController::class,'edit'])->name("users.edit");
+Route::patch("/users/{id}",[UserController::class,'update'])->name("users.update");
 Route::post("/users",[UserController::class,'store'])->name("users.store");
 Route::get("/users/user/{id}",[UserController::class,'show'])->name("user.show");
 Route::delete("/users/user/{id}",[UserController::class,'destroy'])->name("user.destroy");
-

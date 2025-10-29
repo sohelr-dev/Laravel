@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -112,24 +113,60 @@ class UserController extends Controller
         //another method
 
         //validation
-        $request->validate([
+        $request->validate(
+            [
             'first_name'=>"required|min:2|max:5",
             // 'first_name'=>['required','mix:2','max:5']      //altanative
             'email'=>['required','email','unique:users'],
             'password'=>['required','min:6','confirmed'],
-        ]);
-
-        dd($request->all());
-
-        $user=User::create(
-            [
-                'first_name'=>$request->first_name,
-                'email'=>$request->email,
-                'password'=>$request->password,
-                'role_id'=>$request->role_id,
             ]
-            );
-            dd($user);
+    );
+        // dd($request->all());
+        // Create the user
+        User::create([
+            'first_name' => $request->first_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password), // ✅ hash the password
+            'role_id' => $request->role_id,
+        ]);
+            // $user->create();
+            // dd($user);
+            return redirect()->route('users.index')->with('success',"User Create Successfully !");
+
         
     }
+
+    public function edit($id){
+        $user =User::find($id);
+        $roles =Role::all();
+        $page =request('page',1);
+        // dd($page);
+        return view ("pages.users.edit",compact('roles','user','page'));
+        
+    }
+    public function update(Request $request ,$id){
+        // dd($request->all());
+
+        $request->validate(
+            [
+            'first_name'=>"required|min:2|max:20",
+            'email'=>['required','email','unique:users,email'],
+            
+            ]
+        );
+
+        // dd($request->all());
+
+        
+        $user =User::find($id);
+        $user->update([
+                'id'=>$request->id,
+                'first_name'=>$request->first_name,
+                'email'=>$request->email,
+                'role_id'=>$request->role_id,
+            ]);
+            // dd($user);
+            return redirect()->route('users.index',['page'=>request('page',1)])->with('success',"User Update Successfully !");
+        
+        }
 }

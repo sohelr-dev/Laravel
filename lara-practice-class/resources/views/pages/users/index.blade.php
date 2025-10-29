@@ -38,6 +38,12 @@
      
                               <td class="text-center">
                                    <a href="users/user/{{ $item['userId'] }}" class="btn btn-primary">view</a>
+                                   <form action="{{ route('users.edit',$item['userId']) }}" method="get">
+                                        {{-- <input type="text" name="page" value="{{ request('page',1)]) }}"> --}}
+                                        <button type="submit">edit1</button>
+                                        
+                                   </form>
+                                   {{-- <a href="{{ route('users.edit',['id'=>$item['userId'], 'page'=>request('page',1)]) }}" class="btn btn-secondary">edit</a> --}}
                                    <form action="{{ route('user.destroy', $item['userId']) }}" method="POST" class="d-inline-block">
                                         @csrf
                                         @method('DELETE')
