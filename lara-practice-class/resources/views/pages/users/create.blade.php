@@ -6,7 +6,7 @@
 <div class="container mt-4">
      
      <h2>User Form</h2>
-     <form action="{{ route("users.store") }}" method="post">
+     <form action="{{ route("users.store") }}" method="post" enctype="multipart/form-data">
           @csrf
           <div class="row g-3">
                <div class="col-6">
@@ -40,6 +40,25 @@
                          @endforeach
                     </select>
                </div>
+               <div class="col-6">
+                    <label for="profile" class="form-label"> Profile Image 
+                         <span class="text-mute" data-bs-toggle="tooltip" 
+                              data-bs-placement="top" 
+                              data-bs-title="<ul class='text-start bg-secondary text-light'>
+                                                  <li>Image must be jpg,jpeg or png</li>
+                                                  <li>Image dimantion must be 200x200</li>
+                                                  <li>Image size must be less than 500kb</li>
+                                   
+                                             </ul>"
+                              data-bs-html='true'>
+                              <i class="fa-solid fa-circle-info  fa-lg"></i>
+                         </span>
+                    </label>
+                    <input type="file" name="photo"  class="form-control">
+                     @error('photo')
+                         <span class="text-danger">{{ $message }}</span>
+                    @enderror
+               </div>
                <div class="col-12">
                     @if ($errors->any())
                     <ul>
@@ -52,6 +71,7 @@
                     @endif
 
                </div>
+               
                
                <div class="col-6">
                     
