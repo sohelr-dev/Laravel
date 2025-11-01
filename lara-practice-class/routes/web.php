@@ -1,157 +1,20 @@
 <?php
 
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\TraineeController;
-use App\Http\Controllers\UserController;
-use App\Models\Role;
-use App\Models\Trainee;
-
 Route::get('/', function () {
-    return view('pages.welcome',[
-        'title'=>'SOHEL RANA',
-        'country'=>'Banglaseh'
-    ]);
+    return view('welcome');
 });
 
-// Route::get('/users/{queryid}',function($id){
-//     return view('pages/users',[
-//         'getId'=>$id
-//     ]);
-// });
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/users/{username}/profile/{id}',function($username,$id){
-//     return view('pages.users',[
-//         'user'=>$username,
-//         'id'=>$id
-//     ]);
-// });
-
-
-
-Route::get('/users/{username}/profile/{id?}',function($username,$id=null){
-    return view('pages.users',[
-        'user'=>$username,
-        'id'=>$id
-    ]);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::get('/about', function () {
-//     return view('pages.about');
-// });
-
-//OR route same kaj
-
-//for view 
-Route::view('/about','pages.about');
-
-//for controller
-
-
-//for view
-
-// Route::get('trainees',function(){
-//     // $trainees=[
-//     //     [
-//     //       'name'=>"Sohel Rana",
-//     //       'email'=> "sohel@gmail.com",
-//     //       'phone'=>"01548574252",
-//     //       'counrty'=>"BD",
-//     //       "is_active"=> true,
-//     //       'id'=>1
-//     //     ],
-//     //     [
-//     //       'name'=>"Rahat Rana",
-//     //       'email'=> "Rahat@gmail.com",
-//     //       'phone'=>"01548574252",
-//     //       'counrty'=>"USA",
-//     //       "is_active"=> false,
-//     //       'id'=>2
-//     //     ],
-//     //     [
-//     //       'name'=>"Roxi Rana",
-//     //       'email'=> "Roxi@gmail.com",
-//     //       'phone'=>"01548574252",
-//     //       'counrty'=>"UK",
-//     //       "is_active"=> true,
-//     //       'id'=>3
-//     //     ]
-//     // ];
-//     return view('pages.trainee.index',[
-//         'trainess'=>Trainee::all()
-//     ]);
-// });
-
-Route::get('/trainees',[TraineeController::class,'index'])->name("traine.index");
-// Route::get('/trainees',[TraineeController::class,'index']);
-// Route::get('/trainee/{id}',[TraineeController::class,'show']);
-
-//routimg with name
-
-Route::get('/trainee/{id}',[TraineeController::class,'show']);
-
-//for controler
-
-
-// Route::get('/trainee/{id}',function($id){
-
-//     // $trainees=[
-//     //     [
-//     //       'name'=>"Sohel Rana",
-//     //       'email'=> "sohel@gmail.com",
-//     //       'phone'=>"01548574252",
-//     //       'country'=>"BD",
-//     //       "is_active"=> true,
-//     //       'id'=>1
-//     //     ],
-//     //     [
-//     //       'name'=>"Rahat Rana",
-//     //       'email'=> "Rahat@gmail.com",
-//     //       'phone'=>"01548574252",
-//     //       'country'=>"USA",
-//     //       "is_active"=> false,
-//     //       'id'=>2
-//     //     ],
-//     //     [
-//     //       'name'=>"Roxi Rana",
-//     //       'email'=> "Roxi@gmail.com",
-//     //       'phone'=>"01548574252",
-//     //       'country'=>"UK",
-//     //       "is_active"=> true,
-//     //       'id'=>3
-//     //     ]
-//     // ];
-
-//     // $single =collect($trainees)->firstWhere('id', $id);
-//     //dd means dumb and die.
-//     // dd($single);
-
-//     //alternative
-
-//     // $single1 =array_filter($trainees,fn($item)=>$item['id'] ==$id);
-//     // $single = reset($single1);
-//     // dd($single);
-
-//     return view('pages.trainee.show',[
-//         // 'id'=>$id,
-//         "trainee"=>Trainee::readById($id)
-//     ]);
-// });
-
-
-// Route::get('/roles',function(){
-//     // dd(Role::all());
-//     (Role::all());
-// });
-
-Route::get('/roles',[RoleController::class,'index'])->name("roles.index");
-Route::get('/roles/role/{id}',[RoleController::class,'show'])->name("roles.show");
-
-Route::get("/users",[UserController::class,'index'])->name("users.index");
-Route::get("/users/create",[UserController::class,'create'])->name("users.create");
-Route::get("/users/edit/{id}",[UserController::class,'edit'])->name("users.edit");
-Route::patch("/users/{id}",[UserController::class,'update'])->name("users.update");
-Route::post("/users",[UserController::class,'store'])->name("users.store");
-Route::get("/users/user/{id}",[UserController::class,'show'])->name("user.show");
-Route::delete("/users/user/{id}",[UserController::class,'destroy'])->name("user.destroy");
+require __DIR__.'/auth.php';
