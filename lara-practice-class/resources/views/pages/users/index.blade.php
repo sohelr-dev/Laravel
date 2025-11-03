@@ -48,8 +48,8 @@
                                         <button type="submit">edit1</button>
                                         
                                    </form> --}}
-                                   <a href="{{ route('users.edit',['id'=>$item['userId'], 'page'=>request('page',1)]) }}" class="btn btn-secondary">edit</a>
-                                   <form action="{{ route('user.destroy', $item['userId']) }}" method="POST" class="d-inline-block">
+                                   <a href="{{ route('users.edit',['user'=>$item['userId'], 'page'=>request('page',1)]) }}" class="btn btn-secondary">edit</a>
+                                   <form action="{{ route('users.destroy', $item['userId']) }}" method="POST" class="d-inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger" title="Delete User">
