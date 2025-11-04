@@ -8,17 +8,19 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use phpDocumentor\Reflection\Types\This;
 
 class RegisterConfirmationMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    //variable like propertiy as protected
+    protected $user;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($_data)
     {
-        //
+        $this->user = $_data;
     }
 
     /**
@@ -39,6 +41,9 @@ class RegisterConfirmationMail extends Mailable
     {
         return new Content(
             view: 'mails.registration-confirmation',
+            with:[
+                'reg_data'=>$this->user
+            ]
         );
     }
 

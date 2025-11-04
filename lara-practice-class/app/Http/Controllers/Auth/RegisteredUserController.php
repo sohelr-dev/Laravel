@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules;
@@ -58,7 +59,15 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
         // dd($user);
-        Mail::to($user->email)->send(new RegisterConfirmationMail($user));
+        $data = DB::table('users as u')
+            ->join('roles as r', 'u.role_id','=','r.id')
+            ->select('u.first_name','u.email','r.name as roleName')
+            ->where('u.id',$user->id)
+            ->first();
+            // dd($data);
+
+        Mail::to($user->email)->send(new RegisterConfirmationMail($data));
+        // dd('mail sent');
 
         Auth::login($user);
 

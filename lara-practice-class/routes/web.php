@@ -13,10 +13,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test-mail',function(){
-    Mail::to('sohelrana15809@gmail.com')->send(new RegisterConfirmationMail());
-    return 'Mail Sent';
-});
+// Route::get('/test-mail',function(){
+//     Mail::to('sohelrana15809@gmail.com')->send(new RegisterConfirmationMail());
+//     return 'Mail Sent';
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
