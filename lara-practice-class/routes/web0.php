@@ -14,6 +14,7 @@ Route::get('/', function () {
         'country'=>'Banglaseh'
     ]);
 });
+// Route::get('/trainee/{id}',[StatusController::class,'show']);
 
 // Route::get('/users/{queryid}',function($id){
 //     return view('pages/users',[
