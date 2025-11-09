@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusController;
@@ -73,7 +74,12 @@ Route::middleware('auth')->group(function () {
     // Route::resource('users',UserController::class);
     Route::resource('statuses',StatusController::class);
 
+    //
+    Route::resource('gallery',GalleryController::class)->except(['update','edit',]);
+
     // Route::resource('users',UserController::class)->middleware('role:2,3');
+
+    
 });
 
 // web0

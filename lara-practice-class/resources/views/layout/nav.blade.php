@@ -61,6 +61,8 @@
                          <ul class="dropdown-menu" style="left: -70px">
                               <li><a class="dropdown-item" href="{{ route('profile.edit') }}">My Profile</a></li>
                               <li>
+                              <li><a class="dropdown-item" href="{{ route('gallery.index') }}">Gallery</a></li>
+                              <li>
                                    <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="dropdown-item">Log out</button>
